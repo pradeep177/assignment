@@ -1,11 +1,11 @@
 .App {
   text-align: center;
 }
+body{
+  background: #c9bdbd;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -28,11 +28,74 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+.card{
+  /* border: 40px solid white;
+  background:white; */
+  margin:5em;
+  height:10%;
+}
+
+.data{
+  border: 40px solid white;
+  background:white;
+  display: flex;
+  justify-content:space-between;
+  margin-bottom: inherit;
+  border-left-style: groove;
+  border-bottom-style: ridge;
+}
+
+button {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 15px;
+  height: 0%;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:hover {background-color: #3e8e41}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.close{
+  position: absolute;
+  top: 80%;
+  left: 34%;
+  font-size: 20px;
+  padding: 8px 30px;
+  height: fit-content;
+}
+
+.date{
+  position: absolute;
+  top: 7em;
+  left: 10em;
+}
+
+/* Modal{
+  display: flex;
+  align-items: center;
+} */
+
+@media only screen and (max-width: 630px) {
+  .data {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+  button {
+    width: fit-content;
   }
 }

@@ -81,15 +81,21 @@ button:active {
 
 .date{
   position: absolute;
-  top: 7em;
+  top: 4em;
   left: 10em;
 }
 
-/* Modal{
-  display: flex;
-  align-items: center;
-} */
-
+.activity1{
+  color:darkblue;
+ font-size: x-large;
+    text-transform: uppercase;
+}
+.activity2{
+ 
+  color:rgb(131, 23, 4);
+    font-size: x-large;
+    text-transform: uppercase;
+}
 @media only screen and (max-width: 630px) {
   .data {
     flex-direction: column;
@@ -98,4 +104,11 @@ button:active {
   button {
     width: fit-content;
   }
+  .date {
+    left: 0em;
+}
+.react-datepicker{
+  top: 67px;
+}
+
 }

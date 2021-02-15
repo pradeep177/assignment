@@ -14,6 +14,8 @@ Modal.setAppElement('#root')
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [users, setUsers] = useState([])
     const [selectedDate, setSelectedDate] = useState( new Date())
+    const [display, setDisplay] = useState(false)
+    const [changedDay, setChangedDay] = useState(false)
 
     useEffect(() => {
         axios.get('http://localhost:3000/members')
@@ -25,35 +27,38 @@ Modal.setAppElement('#root')
             console.log("err"+error)
           })
     },[])
-
+    
     const CallFunctionTwo = (id) => {       
 
          users
             .filter(user =>  user.id === id)
             .map(info => {
-                console.log(info)
-                console.log(selectedDate)
-                info.activity_periods.map(time => (
-                    console.log(time)
-                   
-                ))
-                
+                //console.log(info)
+                console.log("selected"+selectedDate.toDateString().slice(4,15))
+                info.activity_periods.map(time => {
+                    //console.log("database"+time.start_time.slice(0,11));
+                        if(selectedDate.toDateString().slice(4,15) === time.start_time.slice(0,11)){
+                            setDisplay(true)
+                            console.log(time.start_time.slice(0,11))
+                        }
+                        if(selectedDate.toDateString().slice(4,15) !== time.start_time.slice(0,11)){
+                            setDisplay(false)                      
+                            }
+                })
                 return (
                     <li key={info.id}>
                       <h2>{info.real_name}</h2>                   
                   </li>
                 )
-            })
+             })
 
 }
 
-
-const GetInfo = () => {
-    console.log("hello");
-    return (
-        <div >hello</div>
-    );
-
+const dateChanged = () => {
+       // console.log("user.id")
+        return(
+            CallFunctionTwo()
+        )
 }
 
    return (
@@ -64,15 +69,13 @@ const GetInfo = () => {
                 <div><img src={logo} alt='profile' width='60' height='60'></img></div>
                 <h2>{user.real_name}</h2>
                 <button onClick={() => {setModalIsOpen(true);CallFunctionTwo(user.id)}}>View more</button>
+                {/* {changedDay && dateChanged()} */}
                 </div>
             )
         })}
-
      
         <Modal isOpen={modalIsOpen}
             onRequestClose={() => setModalIsOpen(false)}
-            //onAfterOpen={()=>getInfo()}
-           
             style={{
             overlay: {
                 backgroundColor: 'grey'
@@ -84,20 +87,14 @@ const GetInfo = () => {
             }
             }}
             >
-
-
-
-
-          
-           <GetInfo/>
+        {display ? <div className='activity1'>This User is active on this day</div>:<div className='activity2'>The user is not active on this day</div>}
         
-        <p>Choose a day from the calendar</p>
+        <p>Choose a day from the calendar to check user's active day</p>
         <DatePicker
             className='date'
             selected={selectedDate}
-            onChange={
-                date => {console.log({date});
-                setSelectedDate(date)}
+             onChange={
+                date => {setChangedDay(true);setSelectedDate(date)}  
             }
             dateFormat='dd/MM/yyyy'
             showYearDropdown
@@ -105,10 +102,7 @@ const GetInfo = () => {
         />
         <button className='close' onClick={() => setModalIsOpen(false)}>close</button>
         </Modal>
-       
     </div>
-)
-}
+)}
 
 export default UserComponent
-
